@@ -96,8 +96,8 @@
         let bookID = $(this).attr('doc_id')
         row = $(this).parent().parent()
         $(this).fireModal({
-           title: 'My Modal',
-           content: 'Hello!',
+           title: 'Issue Book',
+          content: 'Hello!',
            body: '<form class="needs-validation" novalidate=""><div class="form-group"><label>Name</label><input type="string" name="name" class="form-control name" required=""> <div class="invalid-feedback"> Name is required</div></div><div class="form-group"><label>Roll No.</label><input type="string" name="roll_no" onkeypress="return isNumberKey(event)" class="form-control roll_no" required=""> <div class="invalid-feedback"> Roll Number is required</div></div><div class="form-group"><label>Phone Number</label><input type="string" name="phone_no" onkeypress="return isNumberKey(event)" class="form-control phone_no" required=""> <div class="invalid-feedback"> Phone No. is required</div></div></form>',
            buttons: [
            {
