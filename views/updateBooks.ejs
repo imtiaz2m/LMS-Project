@@ -1,0 +1,98 @@
+<%- include('layouts/html_start.ejs') %>
+
+<%- include('layouts/layout.ejs') %>
+
+<section class="section">
+    <div class="section-header">
+        <h1>Update Books</h1>
+    </div>
+    <p class="section-lead">
+        Select a Book to update on this page
+    </p>
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Books</h4>
+                        <div class="card-header-action d-flex">
+                            <div class="input-group">
+                                <input type="text" id="myInput" class="form-control" placeholder="Search by Name">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary" onclick="myFunction()"><i
+                                            class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" id="myInput1" class="form-control" placeholder="Search by Author">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary" onclick="myFunction1()"><i
+                                            class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" id="myInput2" class="form-control" placeholder="Search by Department">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary" onclick="myFunction2()"><i
+                                            class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="needs-validation" novalidate="">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id='table-data' class="table table-striped table-md">
+                                    <tbody>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Title</th>
+                                            <th>Author</th>
+                                            <th>Department</th>
+                                            <th>Total Quantity</th>
+                                            <th>Current Quantity</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        <% docs.forEach((doc, i) => { %>
+                                        <tr>
+                                            <td><%= i+1 %></td>
+                                            <td><%= doc.title %></a></td>
+                                            <td>
+                                                <% doc.author.forEach(function(author){ %>
+                                                <div>
+
+                                                    <%= author %>
+                                                </div>
+                                                <%})%>
+                                            </td>
+                                            <td><%= doc.department.name %></td>
+                                            <td>
+                                                <%= doc.quantity %>
+                                            </td>
+                                            <td class="current">
+                                                <%= doc.current %>
+                                            </td>
+                                            <td>
+                                                <a href="/update/<%=doc.department.name%>/<%= doc._id %>" class="btn btn-primary"
+                                                    doc_id='<%= doc._id %>'>Edit</a>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<%- include('layouts/scripts.ejs') %>
+
+<script>
+
+
+</script>
+
+<%- include('./layouts/html_end.ejs') %>

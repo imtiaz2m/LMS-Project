@@ -1,0 +1,36 @@
+{
+  "name": "library-management-system",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "concurrently --kill-others \"webpack --mode production\" \"supervisor -e 'js|css' ./bin/www\"",
+    "start-prod": "NODE_ENV='production' node ./bin/www"
+  },
+  "dependencies": {
+    "connect-mongo": "^3.0.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "ejs": "^3.0.1",
+    "express": "~4.16.1",
+    "express-session": "^1.16.2",
+    "express-validator": "^6.2.0",
+    "hbs": "~4.0.4",
+    "http-errors": "~1.6.3",
+    "moment-timezone": "^0.5.26",
+    "mongoose": "^5.6.11",
+    "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.2",
+    "css-loader": "^3.2.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^4.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "node-sass": "^4.12.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.7"
+  }
+}

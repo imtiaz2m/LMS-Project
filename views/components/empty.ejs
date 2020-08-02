@@ -1,0 +1,15 @@
+<div class="card">
+    <% if (title) { %>
+    <div class="card-header pb-0">
+        <h4><%= title %></h4>
+    </div>
+    <% } %>
+    <div class="card-body">
+        <div class="empty-state" data-height="400" style="height: 400px;">
+            <div class="empty-state-icon">
+                <i class="fas fa-question"></i>
+            </div>
+            <h2><%= message %></h2>
+        </div>
+    </div>
+</div>

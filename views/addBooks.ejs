@@ -1,0 +1,152 @@
+<%- include('layouts/html_start.ejs') %>
+
+<%- include('layouts/layout.ejs') %>
+
+<section class="section">
+    <div class="section-header">
+        <h1>Add a Book</h1>
+    </div>
+    <p class="section-lead">
+        Books can be added on this page
+    </p>
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Enter a Book</h4>
+                    </div>
+                    <form id="enterBook" method="POST" class="needs-validation" novalidate="">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Title</label>
+                                <input id="title" type="text" name="title" class="form-control" required="">
+                                <div class="invalid-feedback">
+                                    Title is required
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Deaprtment</label>
+                                <select id="department" name="department" class="form-control selectric">
+                                    <option value="none" selected disabled>Please select a department</option>
+                                    <option value="Science">Science</option>
+                                    <option value="Fiction">Fiction</option>
+                                    <option value="Arts">Arts</option>
+                                    <option value="Psychology">Psychology</option>
+                                    <option value="Engineering">Engineering</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Quantity</label>
+                                <input id="quantity" type="number" name="quantity" class="form-control" required="">
+                                <div class="invalid-feedback">
+                                    Quantity is required
+                                </div>
+                            </div>
+                            <div class="form-group clone">
+                                <label>Author</label>
+                                <input id="author" type="text" name="author" class="form-control author" required="">
+                                <div class="invalid-feedback">
+                                    Author is required
+                                </div>
+                            </div>
+
+                            <div id="appendHere">
+
+                            </div>
+                            <div class="row">
+                                <div class="col-12 d-flex">
+                                    <div class=" pr-3">
+                                        <button id="removeAuthor" class="btn btn-primary">Remove Author</button>
+                                    </div>
+                                    <div class="">
+                                        <button id="addAuthor" class="btn btn-primary">Add Author</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-right">
+                            <button type="submit" id="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include('layouts/scripts.ejs') %>
+
+<script>
+    $('#addAuthor').click(function (e) {
+        e.preventDefault();
+        authorClone = $('.clone').clone()
+        authorClone.removeClass('clone');
+        $('#appendHere').append(authorClone)
+    })
+    $('#removeAuthor').click(function (e) {
+        e.preventDefault();
+        $('#appendHere .form-group').last().remove()
+        console.log('appendHere ', $('#appendHere .form-group').length);
+    })
+
+    $('#enterBook').submit(function (event) {
+        if ($('#enterBook')[0].checkValidity() === false) {
+            console.log('Validation Failed');
+            return;
+        } else {
+
+            event.preventDefault();
+            var title = $('#title').val();
+            var author = []
+            $('.author').each(function () {
+                author.push($(this).val());
+            })
+            var department = $('#department').val();
+            var quantity = $('#quantity').val()
+            console.log('quantity: ', quantity);
+            console.log('title: ', title);
+            console.log('author: ', author);
+            console.log('department: ', department);
+            if (department != null) {
+                $.ajax({
+                    url: "/addBooks",
+                    type: "POST",
+                    data: {
+                        quantity: quantity,
+                        title: title,
+                        author: author,
+                        department: department
+                    }
+                }).done(function (data) {
+                    if (data.status === "success") {
+                        iziToast.success({
+                            title: 'Success!',
+                            message: data.msg,
+                            position: 'topCenter'
+                        });
+
+                    } else {
+                        iziToast.error({
+                            title: 'Failed!',
+                            message: data.msg,
+                            position: 'topCenter'
+                        });
+                    }
+                })
+            }
+            else {
+                iziToast.error({
+                    title: 'Failed!',
+                    message: "Select a department",
+                    position: 'topCenter'
+                });
+            }
+        }
+    })
+
+
+</script>
+
+<%- include('./layouts/html_end.ejs') %>

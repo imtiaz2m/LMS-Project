@@ -1,0 +1,47 @@
+<div class="main-sidebar">
+    <aside id="sidebar-wrapper">
+        <div class="sidebar-brand  p-2">
+            <a href="/">Library Management System</a>
+        </div>
+        <div class="sidebar-brand sidebar-brand-sm p-2">
+            <a href="index.html">LMS</a>
+        </div>
+        <ul class="sidebar-menu">
+            <li class="menu-header">Dashboard</li>
+
+            <li>
+                <a class="nav-link" href="/addBooks"><i class="fas fa-user-graduate"></i> <span>Add Books</span></a>
+            </li>
+            <li>
+                <a class="nav-link" href="/updateBooks"><i class="fas fa-chalkboard-teacher"></i> <span>Update
+                        Books</span></a>
+            </li>
+            <li>
+                <a class="nav-link" href="/viewBooks"><i class="fas fa-user-graduate"></i> <span>View Books</span></a>
+            </li>
+            <li>
+                <a class="nav-link" href="/returnBook"><i class="fas fa-chalkboard-teacher"></i> <span>Return
+                        Books</span></a>
+            </li>
+            <li>
+                <a class="nav-link" href="/removeBooks"><i class="fas fa-chalkboard-teacher"></i> <span>Remove
+                        Books</span></a>
+            </li>
+            <li>
+                <a class="nav-link" href="/addDepartment"><i class="fas fa-chalkboard-teacher"></i> <span>Add
+                        Departments</span></a>
+            </li>
+            <li>
+                <a class="nav-link" href="/editDepartmentList"><i class="fas fa-chalkboard-teacher"></i> <span>Edit
+                        Departments</span></a>
+            </li>
+            <% if (type === 'superuser') { %>
+            <li>
+                <a class="nav-link" href="/manageAdmin"><i class="fas fa-chalkboard-teacher"></i> <span>Manage
+                        Admins</span></a>
+            </li>
+            <% } %>
+        </ul>
+
+    </aside>
+</div>
