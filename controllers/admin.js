@@ -50,13 +50,7 @@ exports.manageAdminPost = async function (req, res, next) {
 
     // create admin
     let admin = await AdminModel.create({ firstname, lastname, email, password, superuser: false });
-    let obj = {
-        type: 'admin', firstname, lastname, email, password, superuser: false
-    }
-    const Admin = Factory.create(obj);
-    console.log('Admin: ', Admin);
-    let adminNew = Admin.createEntry()
-
+   
     if (admin)
         return res.json({
             status: 'success',
