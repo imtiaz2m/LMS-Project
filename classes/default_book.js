@@ -13,6 +13,7 @@ class Default {
     }
 
     async createEntry() {
+        console.log('this.department: ', this.department);
         let department = await DepartmentModel.findOne({ name: this.department })
         console.log('department: ', department);
 
@@ -46,12 +47,13 @@ class Default {
 
     async updater(updateobj) {
         let book = await BookModel.findById(updateobj.bookID)
+        let department = await DepartmentModel.findOne({ name: updateobj.department })
         if (book) {
             if(updateobj.department)
             book.quantity = updateobj.quantity
             book.title = updateobj.title
             book.author = updateobj.author
-            book.department = updateobj.department
+            book.department = department._id
             book.save()
             return true
         }

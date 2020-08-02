@@ -166,7 +166,7 @@ exports.updateBook = async function (req, res) {
     var Book = Factory.create(obj);
 
     let updateobj = {
-        bookID, quantity, title, author
+        bookID, quantity, title, author, department
     }
 
     let status = await Book.updater(updateobj)
