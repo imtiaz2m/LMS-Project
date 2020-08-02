@@ -1,5 +1,6 @@
 const BookModel = require('../models/book');
 const DepartmentModel = require('../models/depertment');
+const IssuesModel = require('../models/issue');
 
 
 class Default {
@@ -48,9 +49,12 @@ class Default {
     async updater(updateobj) {
         let book = await BookModel.findById(updateobj.bookID)
         let department = await DepartmentModel.findOne({ name: updateobj.department })
+        let issue = await IssuesModel.find({book_id:updateobj.bookID})
+
         if (book) {
             if(updateobj.department)
             book.quantity = updateobj.quantity
+            book.current = updateobj.quantity - issue.length
             book.title = updateobj.title
             book.author = updateobj.author
             book.department = department._id
