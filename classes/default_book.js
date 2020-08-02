@@ -36,7 +36,7 @@ class Default {
     }
 
     async updatePage(bookID) {
-        let book = await BookModel.findById(bookID)
+        let book = await BookModel.findById(bookID).populate('department')
         let departments = await DepartmentModel.find({})
 
         let obj = {
@@ -49,17 +49,21 @@ class Default {
     async updater(updateobj) {
         let book = await BookModel.findById(updateobj.bookID)
         let department = await DepartmentModel.findOne({ name: updateobj.department })
-        let issue = await IssuesModel.find({book_id:updateobj.bookID})
-
-        if (book) {
-            if(updateobj.department)
-            book.quantity = updateobj.quantity
-            book.current = updateobj.quantity - issue.length
-            book.title = updateobj.title
-            book.author = updateobj.author
-            book.department = department._id
-            book.save()
-            return true
+        let issue = await IssuesModel.find({ book_id: updateobj.bookID })
+        if (issue.length < updateobj.quantity){
+            if (book) {
+                if (updateobj.department)
+                book.quantity = updateobj.quantity
+                book.current = updateobj.quantity - issue.length
+                book.title = updateobj.title
+                book.author = updateobj.author
+                book.department = department._id
+                book.save()
+                return true
+            }
+            else {
+                return false
+            }
         }
         else{
             return false
@@ -67,7 +71,7 @@ class Default {
     }
 
     async removeBook() {
-        
+
     }
 
 }

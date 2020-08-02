@@ -180,7 +180,7 @@ exports.updateBook = async function (req, res) {
     else {
         res.json({
             status: 'failed',
-            msg: 'Book does not exist',
+            msg: 'There was an issue',
         });
     }
 
