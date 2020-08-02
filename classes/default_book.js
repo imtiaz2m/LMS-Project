@@ -50,7 +50,7 @@ class Default {
         let book = await BookModel.findById(updateobj.bookID)
         let department = await DepartmentModel.findOne({ name: updateobj.department })
         let issue = await IssuesModel.find({ book_id: updateobj.bookID })
-        if (issue.length < updateobj.quantity){
+        if (issue.length <= updateobj.quantity){
             if (book) {
                 if (updateobj.department)
                 book.quantity = updateobj.quantity
