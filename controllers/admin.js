@@ -55,7 +55,6 @@ exports.manageAdminPost = async function (req, res, next) {
         return res.json({
             status: 'success',
             msg: 'Successfully created admin',
-            data: adminNew
         });
 
     return res.json({
