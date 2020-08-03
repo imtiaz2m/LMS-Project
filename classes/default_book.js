@@ -70,9 +70,6 @@ class Default {
         }
     }
 
-    async removeBook() {
-
-    }
 
 }
 
