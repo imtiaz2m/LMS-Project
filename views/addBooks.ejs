@@ -109,41 +109,51 @@
             console.log('title: ', title);
             console.log('author: ', author);
             console.log('department: ', department);
-            if (department != null) {
-                $.ajax({
-                    url: "/addBooks",
-                    type: "POST",
-                    data: {
-                        quantity: quantity,
-                        title: title,
-                        author: author,
-                        department: department
-                    }
-                }).done(function (data) {
-                    if (data.status === "success") {
-                        iziToast.success({
-                            title: 'Success!',
-                            message: data.msg,
-                            position: 'topCenter'
-                        });
+            if (quantity > 0) {
+                if (department != null) {
+                    $.ajax({
+                        url: "/addBooks",
+                        type: "POST",
+                        data: {
+                            quantity: quantity,
+                            title: title,
+                            author: author,
+                            department: department
+                        }
+                    }).done(function (data) {
+                        if (data.status === "success") {
+                            iziToast.success({
+                                title: 'Success!',
+                                message: data.msg,
+                                position: 'topCenter'
+                            });
 
-                    } else {
-                        iziToast.error({
-                            title: 'Failed!',
-                            message: data.msg,
-                            position: 'topCenter'
-                        });
-                    }
-                })
+                        } else {
+                            iziToast.error({
+                                title: 'Failed!',
+                                message: data.msg,
+                                position: 'topCenter'
+                            });
+                        }
+                    })
+                }
+                else {
+                    iziToast.error({
+                        title: 'Failed!',
+                        message: "Select a department",
+                        position: 'topCenter'
+                    });
+                }
             }
-            else {
+            else{
                 iziToast.error({
-                    title: 'Failed!',
-                    message: "Select a department",
-                    position: 'topCenter'
-                });
+                        title: 'Failed!',
+                        message: "Enter a valid quantitiy",
+                        position: 'topCenter'
+                    });
             }
         }
+
     })
 
 
